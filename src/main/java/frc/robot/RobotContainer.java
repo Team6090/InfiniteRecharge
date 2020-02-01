@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Gyro;
+import net.bancino.robotics.jlimelight.Limelight;
 import net.bancino.robotics.swerveio.exception.SwerveException;
 import net.bancino.robotics.swerveio.exception.SwerveRuntimeException;
 
@@ -32,6 +33,8 @@ public class RobotContainer {
   private final XboxController xbox0 = new XboxController(0);
 
   private final Gyro gyro = new Gyro();
+
+  private final Limelight limelight = new Limelight();
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
