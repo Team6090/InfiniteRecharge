@@ -30,6 +30,10 @@ public class ShooterWithJoystick extends CommandBase {
 
     private double positionRef = 0;
 
+    private static final double hoodPositionIncrement = RobotContainer.config().getDouble("hoodPositionIncrement");
+    private static final double maxHoodPosition = RobotContainer.config().getDouble("maxHoodPosition");
+    private static final double minHoodPosition = RobotContainer.config().getDouble("minHoodPosition");
+
     /** Creates a new ShooterWithJoystick, of course. */
     public ShooterWithJoystick(Shooter shooter, Limelight limelight, XboxController xbox,
             XboxController.Button shooterButton, XboxController.Axis hoodAxis) {
@@ -54,11 +58,11 @@ public class ShooterWithJoystick extends CommandBase {
          */
         if (manualHoodControl) {
             double speedRef = -xbox.getRawAxis(hoodAxis.value);
-            positionRef = positionRef + (speedRef * Const.Shooter.HOOD_POSITION_INCREMENT);
-            if (positionRef > Const.Shooter.MAX_HOOD_POSITION) {
-                positionRef = Const.Shooter.MAX_HOOD_POSITION;
-            } else if (positionRef < Const.Shooter.MIN_HOOD_POSITION) {
-                positionRef = Const.Shooter.MIN_HOOD_POSITION;
+            positionRef = positionRef + (speedRef * hoodPositionIncrement);
+            if (positionRef > maxHoodPosition) {
+                positionRef = maxHoodPosition;
+            } else if (positionRef < Const.Shooter.minHoodPosition) {
+                positionRef = Const.Shooter.minHoodPosition;
             }
         }
         double[] camtran = limelight.getCamTran();

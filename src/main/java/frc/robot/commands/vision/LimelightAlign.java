@@ -9,6 +9,7 @@ package frc.robot.commands.vision;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Const;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Shooter;
 import frc.robot.util.RollingAverage;
@@ -32,7 +33,12 @@ public class LimelightAlign extends CommandBase {
 
     private final long timeout;
     private long startTime = 0;
-    RollingAverage rollingAverageRCW, rollingAverageSTR, rollingAverageFWD  = new RollingAverage(Const.RollingAverage.WINDOW_SIZE);
+    RollingAverage rollingAverageRCW, rollingAverageSTR, rollingAverageFWD  = new RollingAverage(rollingAverageWindow);
+    private static final double ballGetterAcceptedOffsetBounds = RobotContainer.config().getDouble("ballGetterAcceptedOffsetBounds");
+    private static final double distanceToTarget = RobotContainer.config().getDouble("distanceToTarget");
+    private static final double strafeAdjustSpeed = RobotContainer.config().getDouble("strafeAdjustSpeed");
+    private static final double forwardAdjustSpeed = RobotContainer.config().getDouble("forwardAdjustSpeed");
+    private static final double rotateAdjustSpeed = RobotContainer.config().getDouble("rotateAdjustSpeed");
 
     public LimelightAlign(SwerveDrive drivetrain, Limelight limelight, Shooter shooter, boolean doFrontHatch, long timeout) {
         this.drivetrain = drivetrain;
@@ -70,8 +76,8 @@ public class LimelightAlign extends CommandBase {
          */
         rollingAverageRCW.add(limelight.getHorizontalOffset());
         rcw = rollingAverageRCW.get();
-        if ((rcw <= Const.LimelightAlign.ACCEPTED_OFFSET_BOUNDS)
-                && (rcw > -Const.LimelightAlign.ACCEPTED_OFFSET_BOUNDS)) {
+        if ((rcw <= Const.LimelightAlign.ballGetterAcceptedOffsetBounds)
+                && (rcw > -Const.LimelightAlign.ballGetterAcceptedOffsetBounds)) {
             rcw = 0;
             rcwIsGood = true;
         }
@@ -79,16 +85,16 @@ public class LimelightAlign extends CommandBase {
         if (!doFrontHatch) {
             double[] camtran = limelight.getCamTran();
             rollingAverageFWD.add(camtran[2]);
-            fwd = Math.abs(rollingAverageFWD.get()) - Const.LimelightAlign.DISTANCE_TO_TARGET;
-            if ((fwd <= Const.LimelightAlign.ACCEPTED_OFFSET_BOUNDS)
-                    && (fwd > -Const.LimelightAlign.ACCEPTED_OFFSET_BOUNDS)) {
+            fwd = Math.abs(rollingAverageFWD.get()) - Const.LimelightAlign.distanceToTarget;
+            if ((fwd <= Const.LimelightAlign.ballGetterAcceptedOffsetBounds)
+                    && (fwd > -Const.LimelightAlign.ballGetterAcceptedOffsetBounds)) {
                 fwd = 0;
                 fwdIsGood = true;
             }
             rollingAverageSTR.add(camtran[0]);
             str = rollingAverageSTR.get();
-            if ((str <= Const.LimelightAlign.ACCEPTED_OFFSET_BOUNDS)
-                    && (str > -Const.LimelightAlign.ACCEPTED_OFFSET_BOUNDS)) {
+            if ((str <= Const.LimelightAlign.ballGetterAcceptedOffsetBounds)
+                    && (str > -Const.LimelightAlign.ballGetterAcceptedOffsetBounds)) {
                 str = 0;
                 strIsGood = true;
             }
@@ -100,9 +106,9 @@ public class LimelightAlign extends CommandBase {
          * and set the strafe, forward, and rotate checks to true.
          */
         if (limelight.hasValidTargets()) {
-            strSpeed = str * Const.LimelightAlign.STRAFE_ADJUST_SPEED;
-            rcwSpeed = rcw * Const.LimelightAlign.ROTATE_ADJUST_SPEED;
-            fwdSpeed = fwd * Const.LimelightAlign.FORWARD_ADJUST_SPEED;
+            strSpeed = str * strafeAdjustSpeed;
+            rcwSpeed = rcw * rotateAdjustSpeed;
+            fwdSpeed = fwd * forwardAdjustSpeed;
         } else {
             strSpeed = rcwSpeed = fwdSpeed = 0;
             strIsGood = rcwIsGood = fwdIsGood = true;

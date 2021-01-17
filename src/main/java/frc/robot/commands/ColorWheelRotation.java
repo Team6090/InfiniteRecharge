@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Const;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.Elevator;
 import com.revrobotics.ColorSensorV3;
 
@@ -13,7 +14,9 @@ public class ColorWheelRotation extends CommandBase {
     public Elevator.WheelColor currentColor, previousColor;
     public int revCount;
     public boolean rotationComplete;
-    
+    private static final double elevatorColorChanges = RobotContainer.config().getDouble("elevatorColorChanges");
+    private static final double colorWheelSpeed = RobotContainer.config().getDouble("colorWheelSpeed");
+
     public ColorWheelRotation(Elevator elevator) {
         this.colorSensor = elevator.getColorSensor();
         this.elevator = elevator;
@@ -31,14 +34,15 @@ public class ColorWheelRotation extends CommandBase {
                 previousColor = elevator.toWheelColor(colorSensor.getColor());
                 previousColor = currentColor;
             }
-            if (revCount >= Const.Elevator.NUMBER_OF_COLOR_CHANGES) {
+            /* Ask Bancino if this is correct inplace of "Const.Elevator.NUMBER_OF_COLOR_CHANGES" */
+            if (revCount >= Const.Elevator.elevatorColorChanges) {
                 /* Reset everything to the starting configuration for the next run. */
                 elevator.setWheelSpeed(0);
                 revCount = 0;
                 previousColor = null;
                 rotationComplete = true;
             } else {
-                elevator.setWheelSpeed(Const.Speed.COLOR_WHEEL_FIXED_SPEED);
+                elevator.setWheelSpeed(Const.Speed.colorWheelSpeed);
             }
         }
     // Returns true when the command should end.

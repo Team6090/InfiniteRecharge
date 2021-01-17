@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.Const;
+import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -37,21 +38,23 @@ public class Elevator extends SubsystemBase {
     private final ColorSensorV3 colorSensor = new ColorSensorV3(I2C.Port.kOnboard);
     private final CANPIDController elevatorPID = new CANPIDController(elevatorMotor);
 
-    private final Solenoid lockEnable = new Solenoid(Const.CAN.PNEUMATIC_CONTROL_MODULE, Const.Pneumatic.ELEVATOR_LOCK_ENABLE);
-    private final Solenoid lockDisable = new Solenoid(Const.CAN.PNEUMATIC_CONTROL_MODULE, Const.Pneumatic.ELEVATOR_LOCK_DISABLE);
+    private final Solenoid lockEnable = new Solenoid(pwmCanId, Const.Pneumatic.ELEVATOR_LOCK_ENABLE);
+    private final Solenoid lockDisable = new Solenoid(pwmCanId, Const.Pneumatic.ELEVATOR_LOCK_DISABLE);
     
     private WheelColor targetColor, previousColor, currentColor;
     private int revCount = 0;
 
     private boolean locked = false;
+    private static final double elevatorP = RobotContainer.config().getDouble("elevatorP");
+    private static final double elevatorI = RobotContainer.config().getDouble("elevatorI");
 
     public static enum WheelColor {
         RED, GREEN, BLUE, YELLOW
     };
 
     public Elevator() {
-        elevatorPID.setP(Const.PID.ELEVATOR_P);
-        elevatorPID.setI(Const.PID.ELEVATOR_I);
+        elevatorPID.setP(elevatorP);
+        elevatorPID.setI(Const.PID.elevatorI);
         elevatorMotor.setIdleMode(IdleMode.kBrake);
         setLocked(false);
     }

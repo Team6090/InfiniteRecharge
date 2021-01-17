@@ -10,6 +10,7 @@ package frc.robot.commands.vision;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Const;
+import frc.robot.RobotContainer;
 import net.bancino.robotics.swerveio.SwerveDrive;
 import net.bancino.robotics.swerveio.geometry.SwerveVector;
 
@@ -26,6 +27,11 @@ public class AutonBallGetter extends CommandBase {
     boolean isFinished = false;
     int scanTracker = 0;
     int maxTrackScans = 10;
+    private static final double cameraAngleX = RobotContainer.config().getDouble("cameraAngleX");
+    private static final Double cameraResX = RobotContainer.config().getDouble("cameraResX");
+    private static final Double ballGetterAcceptedOffsetBounds = RobotContainer.config().getDouble("ballGetterAcceptedOffsetBounds");
+    private static final Double adjustSpeed = RobotContainer.config().getDouble("adjustSpeed");
+    
 
     public AutonBallGetter(SwerveDrive drivetrain) {
         this.drivetrain = drivetrain;
@@ -57,13 +63,13 @@ public class AutonBallGetter extends CommandBase {
             return;
         }
         /** Some math to find the real, actual angle of the blob from the camera. */
-        ballAngle = bloberooX[0] * (Const.AutonBallGetter.CAMERA_ANGLE_X / Const.AutonBallGetter.CAMERA_RES_X);
+        ballAngle = bloberooX[0] * (Const.AutonBallGetter.cameraAngleX / Const.AutonBallGetter.cameraResX);
         angleDiff = gyroAngle - ballAngle;
-        if ((angleDiff <= Const.AutonBallGetter.ACCEPTED_OFFSET_BOUNDS) && (angleDiff >= -Const.AutonBallGetter.ACCEPTED_OFFSET_BOUNDS)) {
+        if ((angleDiff <= Const.AutonBallGetter.ballGetterAcceptedOffsetBounds) && (angleDiff >= -Const.AutonBallGetter.ballGetterAcceptedOffsetBounds)) {
             angleDiff = 0;
         }
         /** Actually drive with the vector made from calculations. */
-        SwerveVector trackWithZ = new SwerveVector(0, 0, (angleDiff * Const.AutonBallGetter.BALL_ADJUST_SPEED));
+        SwerveVector trackWithZ = new SwerveVector(0, 0, (angleDiff * Const.AutonBallGetter.adjustSpeed));
         drivetrain.drive(trackWithZ);
     }
 
