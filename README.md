@@ -21,16 +21,16 @@ Every once and a while (or whenever you're asked), you should run
 
         $ git submodule foreach git pull
 
-To update the submodule code, ensuring you have the latest version.
+After your `git pull` to update the submodule code, ensuring you have the latest version.
 
 ## Building & Deploying
 For the impatient: just run this command in the root of the repository to build the code:
 
-        $ ./gradlew clean build -PuseSubmodules
+        $ ./gradlew build -PuseSubmodules
 
 If you want to deploy the code, run this command:
 
-        $ ./gradlew clean build deploy -PuseSubmodules
+        $ ./gradlew deploy -PuseSubmodules
 
 Our workflow guide can be found [here](#contributing)
 
@@ -46,7 +46,6 @@ The following dependencies have been set up to be built from source:
 
 - [SwerveIO](https://git.bancino.net/?p=robotics/SwerveIO.git)
 - [JLimelight](https://git.bancino.net/?p=robotics/JLimelight.git)
-- [LibOI](https://github.com/Team6090/?p=robotics/LibOI.git)
 
 In the event you want to use a local copy of all of the above projects, specify the `useSubmodules` property to use the local source instead of the Maven dependencies.
 
@@ -59,7 +58,7 @@ This command will compile and include a local copy of the projects so that you c
 ## Competition Checklist
 - [ ] Update Laptops
     - [ ] Windows Update
-    - [ ] Code (always ` git pull`)
+    - [ ] Code (always `git pull`)
     - [ ] **See the [versions table](https://github.com/Team6090/Software-Table/blob/master/README.md) for software updates**
 - [ ] Ensure laptop functionality
     - [ ] Driver Station
