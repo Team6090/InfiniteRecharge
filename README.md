@@ -3,17 +3,19 @@ The official repository of Team 6090's 2020 infinite recharge code, vision, and 
 
 To whom it may concern, a text file of all of our joystick button and axis mappings can be found in [`JoystickMap.txt`](JoystickMap.txt)
 
+# Minimum Requirements
+Please be sure to have installed these absolute bare minimum requirements:
+
+- Java 11 or higher
+- Git
+
+You will not be able to fetch or build the code without these pieces of software.
+
 # Downloading
-Download the source code with this command:
+Download the source code with these commands:
 
         $ git clone --recursive https://github.com/Team6090/InfiniteRecharge
-
-The `--recursive` flag is important; it downloads all the submodule dependencies. If you did a regular git clone, then make sure you
-
-        $ git submodule init
-        $ git submodule update
-
-to download the submodules.
+        $ git submodule foreach git checkout master
 
 Every once and a while (or whenever you're asked), you should run
 
