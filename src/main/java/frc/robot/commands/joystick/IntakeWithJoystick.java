@@ -10,11 +10,10 @@ package frc.robot.commands.joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.Feed;
-import frc.robot.subsystems.Intake;
 
 public class IntakeWithJoystick extends CommandBase {
 
-  private Intake intake;
+  private Feed intake;
   private Feed feed;
   private XboxController xbox;
   private XboxController.Button intakeButton;
@@ -22,7 +21,7 @@ public class IntakeWithJoystick extends CommandBase {
   /**
    * Creates a new IntakeWithJoystick.
    */
-  public IntakeWithJoystick(Intake intake, Feed feed, XboxController xbox, XboxController.Button intakeButton) {
+  public IntakeWithJoystick(Feed intake, Feed feed, XboxController xbox, XboxController.Button intakeButton) {
     addRequirements(intake);
     this.intake = intake;
     this.feed = feed;

@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.vision.LimelightAlign;
 import frc.robot.subsystems.Feed;
 import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Intake;
 import net.bancino.robotics.swerveio.SwerveDrive;
 import net.bancino.robotics.swerveio.command.PathweaverSwerveDrive;
 import net.bancino.robotics.swerveio.command.PathweaverSwerveDrive.PathExecutionMode;
@@ -33,7 +32,7 @@ public class ThreeCellAutonomous extends SequentialCommandGroup {
 
   //private static final double feedWithShooterSpeed = RobotContainer.config().getDouble("feedWithShooterSpeed");
 
-  public ThreeCellAutonomous(String path, SwerveDrive swerve, Shooter shooter, Intake intake, Feed feed,
+  public ThreeCellAutonomous(String path, SwerveDrive swerve, Shooter shooter, Feed intake, Feed feed,
       Limelight limelight) throws IOException {
     super(new InstantCommand(() -> {
       shooter.run();

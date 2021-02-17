@@ -25,7 +25,6 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.AirCompressor;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Feed;
-import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import net.bancino.robotics.swerveio.SwerveDrive;
 import net.bancino.robotics.swerveio.command.SwerveDriveTeleop;
@@ -85,7 +84,7 @@ public class RobotContainer {
   private final AirCompressor compressor = new AirCompressor();
   private final SwerveDrive drivetrain = DriveTrain.create(gyro);
   private final Feed feed = new Feed();
-  private final Intake intake = new Intake();
+  private final Feed intake = new Feed();
   private final Shooter shooter = new Shooter();
 
   private final SendableChooser<Command> autonCommands = new SendableChooser<>();
