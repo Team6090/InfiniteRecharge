@@ -7,6 +7,11 @@ plugins {
 sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
 
+/* Allow all ssh connections to prevent writing to .known_hosts */
+ssh.settings {
+    knownHosts = allowAnyHosts
+}
+
 /* Declare the RoboRIO host for SSH access */
 remotes {
     roboRio {
