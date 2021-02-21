@@ -45,7 +45,7 @@ public class ShooterHoodWithLimelight extends CommandBase {
   @Override
   public void execute() {
     if (limelight.hasValidTargets()) {
-      rollingAverage.add(limelight.getCamTran()[2]);
+      rollingAverage.add(limelight.getCameraTranslation().getZ());
       shooter.setHoodPositionFromDistance(rollingAverage.get());
     }
   }

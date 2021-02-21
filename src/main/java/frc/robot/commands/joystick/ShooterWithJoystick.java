@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Shooter;
+import net.bancino.robotics.jlimelight.CameraTranslation;
 import net.bancino.robotics.jlimelight.LedMode;
 import net.bancino.robotics.jlimelight.Limelight;
 
@@ -65,10 +66,10 @@ public class ShooterWithJoystick extends CommandBase {
                 positionRef = minHoodPosition;
             }
         }
-        double[] camtran = limelight.getCamTran();
+        CameraTranslation camtran = limelight.getCameraTranslation();
         double distance = -1;
-        if (camtran.length > 2) {
-            distance = camtran[2];
+        if (camtran != null) {
+            distance = camtran.getZ();
             SmartDashboard.putNumber("Commands/ShooterWithJoystick/Limelight 3D Distance", distance);
         }
 

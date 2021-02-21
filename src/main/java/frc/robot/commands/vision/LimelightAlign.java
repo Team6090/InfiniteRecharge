@@ -12,6 +12,7 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Shooter;
 import frc.robot.util.RollingAverage;
+import net.bancino.robotics.jlimelight.CameraTranslation;
 import net.bancino.robotics.jlimelight.LedMode;
 import net.bancino.robotics.jlimelight.Limelight;
 import net.bancino.robotics.swerveio.SwerveDrive;
@@ -117,12 +118,12 @@ public class LimelightAlign extends CommandBase {
          * Forwards and strafe were set equal to zero in init.
          */
         if (!doFrontHatch) {
-            double[] camtran = limelight.getCamTran();
+            CameraTranslation camtran = limelight.getCameraTranslation();
             /** Forwards calculations. */
-            rollingAverageFWD.add(camtran[2]);
+            rollingAverageFWD.add(camtran.getZ());
             fwd = pidFWD.getOutput(rollingAverageFWD.get(), desiredDistancetoTarget);
             /** Strafe calculations. */
-            rollingAverageSTR.add(camtran[0]);
+            rollingAverageSTR.add(camtran.getX());
             str = pidSTR.getOutput(rollingAverageSTR.get(), desiredStrafetoTarget);
         }
 
