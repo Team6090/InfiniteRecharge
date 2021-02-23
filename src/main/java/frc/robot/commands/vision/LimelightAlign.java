@@ -14,6 +14,7 @@ import frc.robot.subsystems.Shooter;
 import frc.robot.util.RollingAverage;
 import net.bancino.robotics.jlimelight.CameraTranslation;
 import net.bancino.robotics.jlimelight.LedMode;
+import net.bancino.robotics.jlimelight.CameraMode;
 import net.bancino.robotics.jlimelight.Limelight;
 import net.bancino.robotics.swerveio.SwerveDrive;
 import net.bancino.robotics.swerveio.geometry.SwerveVector;
@@ -89,6 +90,8 @@ public class LimelightAlign extends CommandBase {
         limelight.setPipeline(0);
         drivetrain.setFieldCentric(false);
         limelight.setLedMode(LedMode.FORCE_ON);
+        limelight.setCameraMode(CameraMode.VISION);
+
         /** For the front hatch, there's no need for head-on alignment where forward and strafe would matter. */
         if (doFrontHatch) {
             fwd = 0;
@@ -103,7 +106,7 @@ public class LimelightAlign extends CommandBase {
     public void execute() {
 
         /** If there's no target, no bueno. Exit the command. */
-        isFinished = limelight.hasValidTargets();
+        isFinished = limelight.hasValidTargets() && System.currentTimeMillis() - startTime > 1000;
 
         /** 
          * RCW must be done for front and back hatches, so it gets calculated here before any other axis.
@@ -151,6 +154,7 @@ public class LimelightAlign extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         limelight.setLedMode(LedMode.PIPELINE_CURRENT);
+        limelight.setCameraMode(CameraMode.DRIVER);
     }
 
     @Override
