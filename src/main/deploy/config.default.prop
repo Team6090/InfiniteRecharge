@@ -57,15 +57,21 @@ swerveModuleD=0
 
 swerveDriveRampRate=0.025
 
-swerveDriveAngleStandingP=0.0075
-swerveDriveAngleStandingI=0
+# Slot 0
+swerveDriveAngleStandingP=0.0065
+# 0.0002
+swerveDriveAngleStandingI=0.000025
 swerveDriveAngleStandingD=0
 
-swerveDriveAngleMovingP=0.007
-swerveDriveAngleMovingI=0.0000004
+# Slot 1
+# 0.007
+swerveDriveAngleMovingP=0
+# 0.00008
+# 0.0008
+swerveDriveAngleMovingI=0
 swerveDriveAngleMovingD=0
 
-swerveDriveAngleAcceptableError=0.25
+swerveDriveAngleAcceptableError=0.5
 
 hoodSlot=0
 hoodTimeout=10
