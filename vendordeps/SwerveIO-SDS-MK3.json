@@ -5,7 +5,7 @@
         {
             "artifactId": "SwerveIO-SDS-MK3",
             "groupId": "net.bancino.robotics",
-            "version": "6.0.2"
+            "version": "6.1.0-rc1"
         }
     ],
     "jniDependencies": [],
@@ -13,11 +13,12 @@
     "mavenUrls": [
         "https://maven.bancino.net",
         "https://jcenter.bintray.com/",
+        "https://maven.bancino.net",
         "https://frcmaven.wpi.edu/artifactory/release",
         "https://devsite.ctr-electronics.com/maven/release",
         "https://www.revrobotics.com/content/sw/max/sdk/maven"
     ],
     "name": "SwerveIO-SDS-MK3",
     "uuid": "net.bancino.robotics:SwerveIO-SDS-MK3",
-    "version": "6.0.2"
+    "version": "6.1.0-rc1"
 }

@@ -88,8 +88,8 @@ public class DriveTrain {
     return new SwerveDrive.Builder().setRampRate(swerveDriveRampRate)
         .useDefaultKinematics(
             new ChassisDimension(new Length(drivetrainWidth, Unit.INCHES), new Length(drivetrainLength, Unit.INCHES)))
-        .setGyro(gyro)
         // TODO: Uncomment this when the gyro PID is tuned.
+        .setGyro(gyro)
         //.setAnglePID(ANGLE_STANDING_SLOT, ANGLE_MOVING_SLOT, (pid) -> {
         //  pid.setP(ANGLE_STANDING_SLOT, swerveDriveStandingAngleP);
         //  pid.setI(ANGLE_STANDING_SLOT, swerveDriveStandingAngleI);
