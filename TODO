@@ -1,1 +1,2 @@
 - GradleRIO deploy must depend on deployConfig
+- Test the new logging API
