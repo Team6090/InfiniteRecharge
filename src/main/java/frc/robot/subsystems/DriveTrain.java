@@ -8,13 +8,13 @@
 package frc.robot.subsystems;
 
 import frc.robot.RobotContainer;
-
+import net.bancino.log.LogLevel;
 import net.bancino.robotics.swerveio.SwerveDrive;
 //import net.bancino.robotics.swerveio.SwerveDrive.DegreeOfFreedom;
 import net.bancino.robotics.swerveio.module.SwerveModule;
 import net.bancino.robotics.swerveio.pid.PIDController;
 import net.bancino.robotics.swerveio.module.MK3SwerveModule;
-import net.bancino.robotics.swerveio.log.DashboardSwerveLogger;
+import net.bancino.robotics.swerveio.log.DashboardLog;
 import net.bancino.robotics.swerveio.geometry.Length;
 import net.bancino.robotics.swerveio.geometry.Length.Unit;
 import net.bancino.robotics.swerveio.geometry.ChassisDimension;
@@ -139,7 +139,8 @@ public class DriveTrain {
           });
 
           swerve.setRampRate(swerveDriveRampRate);
-          swerve.startLogging(new DashboardSwerveLogger());
+          swerve.getLogger().setLevel(LogLevel.IMPORTANT);
+          swerve.getLogger().outputTo(new DashboardLog());
         });
   }
 }
