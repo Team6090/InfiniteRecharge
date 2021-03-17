@@ -139,7 +139,7 @@ public class DriveTrain {
           });
 
           swerve.setRampRate(swerveDriveRampRate);
-          swerve.getLogger().setLevel(LogLevel.IMPORTANT);
+          swerve.getLogger().setLevel(LogLevel.INFO);
           swerve.getLogger().outputTo(new DashboardLog());
         });
   }
