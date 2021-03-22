@@ -60,7 +60,7 @@ swerveDriveRampRate=0.025
 # Slot 0
 swerveDriveAngleStandingP=0.005
 # 0.0002
-swerveDriveAngleStandingI=0.0000
+swerveDriveAngleStandingI=0.00002
 swerveDriveAngleStandingD=0
 
 # Slot 1

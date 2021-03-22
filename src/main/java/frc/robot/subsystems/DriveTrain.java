@@ -92,7 +92,6 @@ public class DriveTrain {
         return new SwerveDrive.Builder()
                 .useDefaultKinematics(new ChassisDimension(new Length(drivetrainWidth, Unit.INCHES),
                         new Length(drivetrainLength, Unit.INCHES)))
-                // TODO: Uncomment this when the gyro PID is tuned.
                 .setGyro(gyro).setAnglePID(ANGLE_STANDING_SLOT, ANGLE_MOVING_SLOT, (pid) -> {
                     pid.setP(ANGLE_STANDING_SLOT, swerveDriveStandingAngleP);
                     pid.setI(ANGLE_STANDING_SLOT, swerveDriveStandingAngleI);
@@ -137,7 +136,7 @@ public class DriveTrain {
                         modulePid.setD(swerveModuleD);
                     });
 
-                    swerve.setRampRate(swerveDriveRampRate);
+                    //swerve.setRampRate(swerveDriveRampRate);
                     swerve.getLogger().setLevel(LogLevel.INFO);
                     swerve.getLogger().outputTo(new DashboardLog());
                 });
