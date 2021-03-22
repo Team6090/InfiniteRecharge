@@ -98,7 +98,7 @@ feedRunSpeed=0.4
 shooterSpeed=0.92
 hoodSpeed=0.25
 
-drivetrainThrottle=0.5
+drivetrainThrottle=0.7
 
 #
 # Elevator
