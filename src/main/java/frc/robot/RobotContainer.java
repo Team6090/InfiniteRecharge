@@ -206,8 +206,6 @@ public class RobotContainer {
     swerveDriveTeleop.setAngleIncrement(drivetrainAngleIncrement);
     drivetrain.setDefaultCommand(swerveDriveTeleop);
 
-  
-
     /* The intake uses the given hand's bumper. */
     intake.setDefaultCommand(new IntakeWithJoystick(intake, feed, xbox1, XboxController.Button.kA));
     
