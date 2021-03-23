@@ -7,10 +7,14 @@
 
 package frc.robot.subsystems;
 
+import java.io.IOException;
+
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotContainer;
 import net.bancino.log.LogLevel;
 import net.bancino.robotics.swerveio.SwerveDrive;
-//import net.bancino.robotics.swerveio.SwerveDrive.DegreeOfFreedom;
+import net.bancino.robotics.swerveio.command.SaveSwerveAngleOffsets;
 import net.bancino.robotics.swerveio.module.SwerveModule;
 import net.bancino.robotics.swerveio.pid.PIDController;
 import net.bancino.robotics.swerveio.module.MK3SwerveModule;
@@ -136,6 +140,16 @@ public class DriveTrain {
 
                     swerve.getLogger().setLevel(LogLevel.INFO);
                     swerve.getLogger().outputTo(new DashboardLog());
+
+                    /* Load angle offsets on start. */
+                    try {
+                        swerve.loadAngleOffsets();
+                    } catch (IOException e) {
+                        DriverStation.reportError("Unable to load swerve drive angle offsets", e.getStackTrace());
+                    }
+
+                    /* Add a dashboard button to save the offsets. */
+                    SmartDashboard.putData("SwerveIO/Calibrate Encoders", new SaveSwerveAngleOffsets(swerve));
                 });
     }
 }
