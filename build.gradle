@@ -31,6 +31,10 @@ task deployConfig() {
         println "Pushed configuration file."
     }
 }
+/* When we deploy code, always deploy the config file too. */
+tasks.named('deploy').configure {
+    dependsOn deployConfig
+}
 
 def ROBOT_MAIN_CLASS = "frc.robot.Robot"
 

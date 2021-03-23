@@ -1,2 +1,2 @@
-- GradleRIO deploy must depend on deployConfig
-- Test the new logging API
+- Swerve drive ramp rate
+- PID controller minimum output threshhold 
