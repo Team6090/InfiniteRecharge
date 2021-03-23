@@ -70,7 +70,13 @@ swerveDriveAngleMovingP=0.0007
 swerveDriveAngleMovingI=0
 swerveDriveAngleMovingD=0
 
+# How many degrees of error (on both sides of the setpoint)
+# should be considered acceptable.
 swerveDriveAngleAcceptableError=0.25
+
+# How many degrees that the joystick should increment the setpoint
+# at full throttle (scaled)
+swerveDriveAngleIncrement=10
 
 hoodSlot=0
 hoodTimeout=10
