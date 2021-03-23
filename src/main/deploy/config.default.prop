@@ -70,7 +70,7 @@ swerveDriveAngleMovingP=0.0007
 swerveDriveAngleMovingI=0
 swerveDriveAngleMovingD=0
 
-swerveDriveAngleAcceptableError=0.5
+swerveDriveAngleAcceptableError=0.25
 
 hoodSlot=0
 hoodTimeout=10
@@ -98,7 +98,7 @@ feedRunSpeed=0.4
 shooterSpeed=0.92
 hoodSpeed=0.25
 
-drivetrainThrottle=0.7
+drivetrainThrottle=0.80
 
 #
 # Elevator
