@@ -56,8 +56,6 @@ public class DriveTrain {
     private static final double swerveModuleI = RobotContainer.config().getDouble("swerveModuleI");
     private static final double swerveModuleD = RobotContainer.config().getDouble("swerveModuleD");
 
-    private static final double swerveDriveRampRate = RobotContainer.config().getDouble("swerveDriveRampRate");
-
     private static final double swerveDriveStandingAngleP = RobotContainer.config()
             .getDouble("swerveDriveAngleStandingP");
     private static final double swerveDriveStandingAngleI = RobotContainer.config()
@@ -136,7 +134,6 @@ public class DriveTrain {
                         modulePid.setD(swerveModuleD);
                     });
 
-                    //swerve.setRampRate(swerveDriveRampRate);
                     swerve.getLogger().setLevel(LogLevel.INFO);
                     swerve.getLogger().outputTo(new DashboardLog());
                 });

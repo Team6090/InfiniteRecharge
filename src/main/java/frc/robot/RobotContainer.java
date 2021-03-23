@@ -70,6 +70,7 @@ public class RobotContainer {
   }
 
   private static final double drivetrainThrottle = config().getDouble("drivetrainThrottle");
+  private static final double drivetrainRampRate = config().getDouble("swerveDriveRampRate");
   private static final int pdpCanId = config().getInt("pdpCanId");
 
   /* Operator Interface */
@@ -200,6 +201,7 @@ public class RobotContainer {
     SwerveDriveTeleop swerveDriveTeleop = new SwerveDriveTeleop(drivetrain, xbox0, XboxController.Axis.kLeftY,
         XboxController.Axis.kLeftX, XboxController.Axis.kRightX);
     swerveDriveTeleop.setThrottle(drivetrainThrottle);
+    swerveDriveTeleop.setRampRate(drivetrainRampRate);
     drivetrain.setDefaultCommand(swerveDriveTeleop);
 
   
