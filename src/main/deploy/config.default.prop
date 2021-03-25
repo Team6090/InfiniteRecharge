@@ -66,14 +66,14 @@ swerveDriveAngleStandingD=0
 
 # Slot 1
 # 0.007
-swerveDriveAngleMovingP=0.0007
+swerveDriveAngleMovingP=0.0008
 # 0.000025
 swerveDriveAngleMovingI=0
 swerveDriveAngleMovingD=0
 
 # How many degrees of error (on both sides of the setpoint)
 # should be considered acceptable.
-swerveDriveAngleAcceptableError=0.22
+swerveDriveAngleAcceptableError=0.2
 
 # How many degrees that the joystick should increment the setpoint
 # at full throttle (scaled)
