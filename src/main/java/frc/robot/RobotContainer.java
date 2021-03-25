@@ -115,7 +115,8 @@ public class RobotContainer {
       File path = paths[i];
       try {
         String name = path.getName().replaceAll(".wpilib.json", "");
-        Command auto =  new PathweaverSwerveDrive(drivetrain, path, PathweaverSwerveDrive.PathExecutionMode.NORMAL, false);
+        Command auto = new PathweaverSwerveDrive(drivetrain, path, PathweaverSwerveDrive.PathExecutionMode.NORMAL,
+            false);
         if (i == 0) {
           autonCommands.setDefaultOption(name, auto);
         } else {
@@ -136,18 +137,14 @@ public class RobotContainer {
    * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    /* Zero the gyro when the start button is pressed. */
-    JoystickButton xbox0Start = new JoystickButton(xbox0, XboxController.Button.kStart.value);
-    xbox0Start.whenPressed(new InstantCommand(() -> {
-      gyro.zero();
-    }));
-
-    /* Toggle field-centric drive (should only be used if we lose the gyro during a match) */
+    /*
+     * Toggle field-centric drive (should only be used if we lose the gyro during a
+     * match)
+     */
     JoystickButton xbox0Back = new JoystickButton(xbox0, XboxController.Button.kBack.value);
     xbox0Back.whenPressed(new InstantCommand(() -> {
       drivetrain.setFieldCentric(!drivetrain.isFieldCentric());
     }));
-    
 
     /* Change the limelight's camera stream mode. */
     POVButton xbox0POV0 = new POVButton(xbox0, 0);
@@ -161,7 +158,9 @@ public class RobotContainer {
         limelight.setStreamMode(StreamMode.STANDARD);
       }
     }));
-    /* Change the camera source on the dashboard between Limelight and Raspberry PI */
+    /*
+     * Change the camera source on the dashboard between Limelight and Raspberry PI
+     */
     POVButton xbox0POV180 = new POVButton(xbox0, 180);
     xbox0POV180.toggleWhenPressed(new InstantCommand(() -> {
       /**
@@ -173,7 +172,9 @@ public class RobotContainer {
     JoystickButton xbox0X = new JoystickButton(xbox0, XboxController.Button.kX.value);
     xbox0X.whileHeld(new LimelightAlign(drivetrain, limelight, shooter, false, -1));
 
-    /** Uses xbox0's A button to activate LimelightAlign (Front Hatch) while held. */
+    /**
+     * Uses xbox0's A button to activate LimelightAlign (Front Hatch) while held.
+     */
     JoystickButton xbox0A = new JoystickButton(xbox0, XboxController.Button.kA.value);
     xbox0A.whileHeld(new LimelightAlign(drivetrain, limelight, shooter, true, -1));
 
@@ -191,7 +192,6 @@ public class RobotContainer {
       intake.lift(false);
     }));
 
-   
   }
 
   private void configureCommands() {
@@ -206,14 +206,30 @@ public class RobotContainer {
     swerveDriveTeleop.setAngleIncrement(drivetrainAngleIncrement);
     drivetrain.setDefaultCommand(swerveDriveTeleop);
 
+    /* Zero the gyro when the start button is pressed. */
+    JoystickButton xbox0Start = new JoystickButton(xbox0, XboxController.Button.kStart.value);
+    xbox0Start.whenPressed(new InstantCommand(() -> {
+      gyro.zero();
+      /*
+       * Tell the joystick command to re-initialize. This will re-set the setpoint so
+       * that the robot will not suddenly rotate.
+       */
+      swerveDriveTeleop.initialize();
+    }));
+
     /* The intake uses the given hand's bumper. */
     intake.setDefaultCommand(new IntakeWithJoystick(intake, feed, xbox1, XboxController.Button.kA));
-    
-    /* The feed will use the left bumper and the A button for reverse. Notice the overlap; The feed will run at the same time as the intake. */
-    feed.setDefaultCommand(new FeedWithJoystick(feed, shooter, xbox1, XboxController.Button.kA, XboxController.Button.kB, XboxController.Button.kX, XboxController.Button.kBumperRight));
+
+    /*
+     * The feed will use the left bumper and the A button for reverse. Notice the
+     * overlap; The feed will run at the same time as the intake.
+     */
+    feed.setDefaultCommand(new FeedWithJoystick(feed, shooter, xbox1, XboxController.Button.kA,
+        XboxController.Button.kB, XboxController.Button.kX, XboxController.Button.kBumperRight));
 
     /** The shooter uses the right bumper. */
-    ShooterWithJoystick shooterWithJoystick = new ShooterWithJoystick(shooter, limelight, xbox1, XboxController.Button.kBumperLeft, XboxController.Axis.kRightY);
+    ShooterWithJoystick shooterWithJoystick = new ShooterWithJoystick(shooter, limelight, xbox1,
+        XboxController.Button.kBumperLeft, XboxController.Axis.kRightY);
     JoystickButton xbox1Y = new JoystickButton(xbox1, XboxController.Button.kY.value);
     xbox1Y.whenPressed(new InstantCommand(() -> {
       shooterWithJoystick.setManualHoodControl(!shooterWithJoystick.hoodManuallyControlled());
