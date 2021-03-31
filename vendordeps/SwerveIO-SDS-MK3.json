@@ -5,7 +5,7 @@
         {
             "artifactId": "SwerveIO-SDS-MK3",
             "groupId": "net.bancino.robotics",
-            "version": "6.1.0-rc1"
+            "version": "6.1.1"
         }
     ],
     "jniDependencies": [],
@@ -20,5 +20,5 @@
     ],
     "name": "SwerveIO-SDS-MK3",
     "uuid": "net.bancino.robotics:SwerveIO-SDS-MK3",
-    "version": "6.1.0-rc1"
+    "version": "6.1.1"
 }
