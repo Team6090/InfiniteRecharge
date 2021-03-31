@@ -12,25 +12,19 @@ Please be sure to have installed these absolute bare minimum requirements:
 You will not be able to fetch or build the code without these pieces of software.
 
 # Downloading
-Download the source code with these commands:
+Download the source code with this command:
 
         $ git clone --recursive https://github.com/Team6090/InfiniteRecharge
         $ git submodule foreach git checkout master
 
-Every once and a while (or whenever you're asked), you should run
-
-        $ git submodule foreach git pull
-
-After your `git pull` to update the submodule code, ensuring you have the latest version.
-
 ## Building & Deploying
-For the impatient: just run this command in the root of the repository to build the code:
+Just run this command in the root of the repository to build the code:
 
-        $ ./gradlew build -PuseSubmodules
+        $ ./gradlew build
 
 If you want to deploy the code, run this command:
 
-        $ ./gradlew deploy -PuseSubmodules
+        $ ./gradlew deploy
 
 Our workflow guide can be found [here](#contributing)
 
