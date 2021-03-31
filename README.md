@@ -15,7 +15,6 @@ You will not be able to fetch or build the code without these pieces of software
 Download the source code with this command:
 
         $ git clone --recursive https://github.com/Team6090/InfiniteRecharge
-        $ git submodule foreach git checkout master
 
 ## Building & Deploying
 Just run this command in the root of the repository to build the code:
